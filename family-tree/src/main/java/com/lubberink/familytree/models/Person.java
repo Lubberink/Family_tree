@@ -19,6 +19,9 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private List<Relation> relations  = new ArrayList<>();
 
+    @OneToMany(mappedBy = "withperson")
+    private List<Relation> relations1  = new ArrayList<>();
+
     @OneToMany(mappedBy = "person")
     private List<Event> events = new ArrayList<>();
 
@@ -68,5 +71,13 @@ public class Person {
 
     public void setNamings(List<Naming> namings) {
         this.namings = namings;
+    }
+
+    public List<Relation> getRelations1() {
+        return relations1;
+    }
+
+    public void setRelations1(List<Relation> relations1) {
+        this.relations1 = relations1;
     }
 }

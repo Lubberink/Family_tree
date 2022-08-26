@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lubberink.familytree.services.PersonService;
 
 import javax.persistence.*;
+import java.util.LinkedHashMap;
 import java.util.Optional;
 
 @Entity(name = "relation")
@@ -20,8 +21,8 @@ public class Relation {
     private Person person;
 
     @ManyToOne
-    @JoinColumn(name = "ofperson_id", insertable = false, updatable = false)
-    private Person ofperson;
+    @JoinColumn(name = "withperson_id", insertable = false, updatable = false)
+    private Person withperson;
 
     @ManyToOne
     @JoinColumn(name = "relationtype_id", insertable = false, updatable = false )
@@ -43,13 +44,13 @@ public class Relation {
         this.person = person;
     }
 
-    public String getOfperson() {
-        String personInformationString = PersonService.getPersonInformationString(ofperson);
-        return personInformationString;
+    public String getWithPerson() {
+        LinkedHashMap<String, Object> informationList = PersonInformation.getInstance().getInformationList();
+        return PersonService.getPersonInformationString(withperson, informationList);
     }
 
-    public void setOfperson(Person ofperson) {
-        this.ofperson = ofperson;
+    public void setWithperson(Person withperson) {
+        this.withperson = withperson;
     }
 
     public RelationType getRelationtype() {
@@ -60,6 +61,10 @@ public class Relation {
         this.relationtype = relationtype;
     }
 
+
+
     public Relation() {
     }
+
+
 }
